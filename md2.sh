@@ -14,9 +14,6 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
-. ./encode.sh
-. ./glarray.sh
-
 LIBNAME="libhash_md2.sh"
 LIBVERSION="1.0"
 
