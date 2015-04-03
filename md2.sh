@@ -17,8 +17,6 @@
 LIBNAME="libhash_md2.sh"
 LIBVERSION="1.0"
 
-glarray_init
-
 md2() {
 	set +u
 	local _value="$*"
