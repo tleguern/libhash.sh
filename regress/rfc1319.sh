@@ -9,6 +9,8 @@ set -u
 . ../glarray.sh
 . ../md2.sh
 
+glarray_init
+
 FAILED=0
 
 t() {
