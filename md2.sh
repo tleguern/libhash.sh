@@ -67,12 +67,6 @@ md2() {
 	done
 	_N=$(( _N + _pad ))
 
-	# BITE
-	#for _i in ${M[*]}; do
-	#	echo $_i
-	#done
-	#exit 42
-
 	# Step 2. Append Checksum
 	$glarray C 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 	local _L=0
