@@ -1,5 +1,5 @@
-libhash
-=======
+libhash.sh
+==========
 
 This repository contains a series of libraries designed to perform
 hashing algorithm in shell script.
@@ -10,8 +10,11 @@ RFC1319.
 Compatibility
 -------------
 
-libhash scripts are known to run with the following shells:
+libhash.sh targets shells supporting the following KSH extensions:
+“local” and arrays. It is therefore known to run with the following
+shells:
 
-- OpenBSD Korn SHell - oksh
 - GNU Bourne-Again SHell - bash;
-
+- MirBSD Korn SHell - mksh;
+- OpenBSD Korn SHell - oksh
+- Public Domain Korn SHell - pdksh;
