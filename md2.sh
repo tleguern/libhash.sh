@@ -18,9 +18,7 @@ LIBNAME="libhash_md2.sh"
 LIBVERSION="1.0"
 
 md2() {
-	set +u
 	local _value="$*"
-	set -u
 
 	# S-box
 	$glarray S  41  46  67 201 162 216 124   1  61  54  84 \
