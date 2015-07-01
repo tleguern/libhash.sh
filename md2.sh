@@ -21,7 +21,7 @@ md2() {
 	local _value="$*"
 
 	# S-box
-	$glarray S  41  46  67 201 162 216 124   1  61  54  84 \
+	glarray S  41  46  67 201 162 216 124   1  61  54  84 \
 		   161 236 240   6  19  98 167   5 243 192 199 \
 		   115 140 152 147  43 217 188  76 130 202  30 \
 		   155  87  60 253 212 224  22 103  66 111  24 \
@@ -46,7 +46,7 @@ md2() {
 		    80 180 143 237  31  26 219 153 141  51 159 \
 		    17 131  20
 
-	$glarray M $(printf "$_value" | sed 's/./& /g')
+	glarray M $(printf "$_value" | sed 's/./& /g')
 	local _N="${#M[*]}"
 
 	# Step 0. Preparation
@@ -66,7 +66,7 @@ md2() {
 	_N=$(( _N + _pad ))
 
 	# Step 2. Append Checksum
-	$glarray C 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+	glarray C 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 	local _L=0
 	local _j=0
 	for _i in $(enum 0 $(( _N / 16 )) ); do
@@ -76,11 +76,11 @@ md2() {
 			_L=${C[_j]}
 		done
 	done
-	$glarray M ${M[*]} ${C[*]}
+	glarray M ${M[*]} ${C[*]}
 	_N=$(( _N + 16 ))
 
 	# Step 3. Initialize MD Buffer
-	$glarray X 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \
+	glarray X 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \
 		0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 
 
