@@ -7,6 +7,8 @@ hashing algorithm in shell script.
 md2.sh implements the obsolete MD2 hashing algorithm, described in
 RFC1319.
 
+Note: The current implementation doesn't handle spaces nor the empty string.
+
 Compatibility
 -------------
 
