@@ -50,7 +50,7 @@ md2() {
 	local _N="${#M[*]}"
 
 	# Step 0. Preparation
-	local _i
+	local _i=0
 	for _i in $(enum 0 $_N); do
 		M[_i]=$(ord ${M[_i]})
 	done
@@ -68,7 +68,7 @@ md2() {
 	# Step 2. Append Checksum
 	$glarray C 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 	local _L=0
-	local _j
+	local _j=0
 	for _i in $(enum 0 $(( _N / 16 )) ); do
 		for _j in $(enum 0 16); do
 			local _c=${M[_i * 16 + _j]}
@@ -85,7 +85,7 @@ md2() {
 
 
 	# Step 4. Process Message in 16-Byte Blocks
-	local _k
+	local _k=0
 	for _i in $(enum 0 $(( _N / 16 )) ); do
 		for _j in $(enum 0 16); do
 			X[16 + _j]=${M[_i * 16 + _j]}
