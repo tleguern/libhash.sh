@@ -62,25 +62,43 @@ md4() {
 	# Step 2. Append Length
 	local _b=$(dectobin $_olen)
 	_m="${_m}$(leftpad $_b $((64 - ${#_b})) 0)"
-	glarray M $(printf "$_m" | sed -E 's/.{16}/& /g')
+
+	# Step 3. Initialize MD Buffer
+	local _A=19088743
+	local _B=2309737967
+	local _C=4276878552
+	local _D=1985229328
+
+	# Step 4. Process Message in 16-Word Blocks
+	glarray M $(printf "$_m" | sed -E 's/.{512}/& /g')
 	local _N="${#M[*]}"
 	if [ $(($_N % 16)) -ne 0 ]; then # Assert !
 		print "Error"
 		exit 2
 	fi
+	_i=0
+	for _i in ${M[*]}; do
+		glarray X $(printf "$_i" | sed -E 's/.{16}/& /g')
 
-	# Step 3. Initialize MD Buffer
-	glarray A 01 23 45 67
-	glarray B 89 171 205 239
-	glarray C 254 220 186 98
-	glarray D 76 54 32 10
+		local _AA=$_A
+		local _BB=$_B
+		local _CC=$_C
+		local _DD=$_D
 
-	# Step 4. Process Message in 16-Word Blocks
-	echo -n $_m | wc -c
-	exit 42
+		# Round 1
+		# Round 2
+		# Round 3
+
+		_A=$((_A + _AA))
+		_B=$((_B + _BB))
+		_C=$((_C + _CC))
+		_D=$((_D + _DD))
+	done
+
 
 	# Step 5. Output
 
 	# Step 6. Cleanup
 	unset M
+	unset X
 }
