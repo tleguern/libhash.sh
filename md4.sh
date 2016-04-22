@@ -64,7 +64,7 @@ md4() {
 	_m="${_m}$(leftpad $_b $((64 - ${#_b})) 0)"
 	glarray M $(printf "$_m" | sed -E 's/.{16}/& /g')
 	local _N="${#M[*]}"
-	if [ (($_N % 16)) -ne 0 ]; then # Assert !
+	if [ $(($_N % 16)) -ne 0 ]; then # Assert !
 		print "Error"
 		exit 2
 	fi
