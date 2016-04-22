@@ -71,8 +71,8 @@ md4() {
 
 	# Step 3. Initialize MD Buffer
 	glarray A 01 23 45 67
-	glarray B 89 ab cd ef
-	glarray C fe dc ba 98
+	glarray B 89 171 205 239
+	glarray C 254 220 186 98
 	glarray D 76 54 32 10
 
 	# Step 4. Process Message in 16-Word Blocks
