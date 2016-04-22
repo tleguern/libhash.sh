@@ -17,6 +17,33 @@
 LIBNAME="libhash_md4.sh"
 LIBVERSION="1.0"
 
+F() {
+	local _x="$1"; shift
+	local _y="$1"; shift
+	local _z="$1"; shift
+
+	# X AND Y OR !X AND Z
+	print $(((_x & _y) | (~_x & _z)))
+}
+
+G() {
+	local _x="$1"; shift
+	local _y="$1"; shift
+	local _z="$1"; shift
+
+	# X AND Y OR X AND Z OR Y AND Z
+	print $(((_x & _y) | (_x & _z) | (_y & _z)))
+}
+
+H() {
+	local _x="$1"; shift
+	local _y="$1"; shift
+	local _z="$1"; shift
+
+	# X XOR Y XOR Z
+	print $((_x ^ _y ^ _z))
+}
+
 md4() {
 	local _value="$*"
 
