@@ -4,10 +4,10 @@ libhash.sh
 This repository contains a series of libraries designed to perform
 hashing algorithm in shell script.
 
-md2.sh implements the obsolete MD2 hashing algorithm, described in
-RFC1319.
+md2.sh implements the obsolete MD2 hashing algorithm, described in RFC1319.
+adler32.sh implements the ADLER32 checksum algorithm, described in RFC1950.
 
-Note: The current implementation doesn't handle spaces nor the empty string.
+Note: The current implementations don't handle spaces nor the empty string.
 
 Compatibility
 -------------
@@ -20,3 +20,7 @@ shells:
 - MirBSD Korn SHell - mksh;
 - OpenBSD Korn SHell - oksh
 - Public Domain Korn SHell - pdksh;
+
+The file adler32.sh is further compatible with:
+
+- Z shell - zsh.
