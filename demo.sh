@@ -54,10 +54,10 @@ fi
 
 set -u
 
-case "$hflag" in
-	md2) . ./md2.sh;;
-	*) echo "$PROGNAME: invalid hash algorithm -- $hflag";;
-esac
+if ! [ -f "./$hflag.sh" ]; then
+	echo "$PROGNAME: invalid hash algorithm -- $hflag"
+	exit 1
+fi
 if [ -n "$sflag" ] && [ -n "$file" ]; then
 	usage
 	exit 1
@@ -76,9 +76,7 @@ fi
 
 . ./encode.sh
 . ./glarray.sh
-. ./${hflag}.sh
+. "./$hflag.sh"
 
-glarray_init
-
-${hflag} "$sflag"
+"$hflag" "$sflag"
 
