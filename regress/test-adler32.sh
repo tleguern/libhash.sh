@@ -20,13 +20,13 @@ t() {
 	ret="$?"
 	if [ $ret -ne $3 ]; then
 		echo "Wrong exit code for $1 \"$2\" ($ret)"
-		((++FAILED))
+		FAILED=$((FAILED + 1))
 		rm -f "$tmp"
 		return
 	fi
 	if [ "$(cat $tmp)" != "$4" ]; then
 		echo "Wrong result for $1 \"$2\" $(cat $tmp)"
-		((++FAILED))
+		FAILED=$((FAILED + 1))
 		rm -f "$tmp"
 		return
 	fi
@@ -38,7 +38,7 @@ t adler32 "a" 0 "00620062"
 t adler32 "00620062" 0 "07040191"
 t adler32 "Wikipedia" 0 "11e60398"
 
-if ((FAILED)); then
+if [ $FAILED -ne 0 ]; then
 	echo "Error: $FAILED errors found."
 	exit 1
 fi
