@@ -22,23 +22,16 @@ adler32() {
 
 	local _s1=1
 	local _s2=0
-
-	glarray M $(printf "$_value" | sed 's/./& /g')
-	local _N="${#M[*]}"
-
-	# Step 0. Preparation
+	# Step 1. Process message
 	local _i=0
-	for _i in $(enum 0 $_N); do
-		local _m=0
+	for _i in $(printf "$_value" | sed 's/./& /g'); do
+		local _b=0
 
-		_m=$(ord ${M[_i]})
-		_s1=$(( (_s1 + _m) % 65521 ))
+		_b=$(ord $_i)
+		_s1=$(( (_s1 + _b) % 65521 ))
 		_s2=$(( (_s2 + _s1) % 65521 ))
 	done
 
 	# Step 2. Output
 	printf "%08x\n" $(( (_s2 << 16) + _s1))
-
-	# Step 3. Cleanup
-	unset M
 }

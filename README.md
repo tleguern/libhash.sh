@@ -23,4 +23,5 @@ shells:
 
 The file adler32.sh is further compatible with:
 
-- Z shell - zsh.
+- Z shell - zsh ;
+- Debian Almquist shell - dash.
