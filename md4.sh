@@ -20,7 +20,7 @@ LIBVERSION="1.0"
 F() {
 	local _x="$1"; shift
 	local _y="$1"; shift
-	local _z="$1"; shift
+	local _z="$1"
 
 	# X AND Y OR !X AND Z
 	print $(((_x & _y) | (~_x & _z)))
@@ -29,7 +29,7 @@ F() {
 G() {
 	local _x="$1"; shift
 	local _y="$1"; shift
-	local _z="$1"; shift
+	local _z="$1"
 
 	# X AND Y OR X AND Z OR Y AND Z
 	print $(((_x & _y) | (_x & _z) | (_y & _z)))
@@ -38,7 +38,7 @@ G() {
 H() {
 	local _x="$1"; shift
 	local _y="$1"; shift
-	local _z="$1"; shift
+	local _z="$1"
 
 	# X XOR Y XOR Z
 	print $((_x ^ _y ^ _z))
