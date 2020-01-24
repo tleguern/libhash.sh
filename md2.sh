@@ -46,14 +46,22 @@ md2() {
 		    80 180 143 237  31  26 219 153 141  51 159 \
 		    17 131  20
 
-	glarray M $(printf "$_value" | sed 's/./& /g')
-	local _N="${#M[*]}"
-
-	# Step 0. Preparation
 	local _i=0
-	for _i in $(enum 0 $_N); do
-		M[_i]=$(ord ${M[_i]})
+	glarray M
+	local _us="$(printf "\037")"
+	OLDIFS="$IFS"
+	IFS="$_us"
+	_value=$(printf "$_value" | sed "s/./&$_us/g")
+	# Step 0. Preparation
+	for _char in $_value; do
+		IFS="$OLDIFS"
+		M[_i]="$(ord "$_char")"
+		IFS="$_us"
+		_i=$(( _i + 1 ))
 	done
+	IFS="$OLDIFS"
+	unset _char _us OLDIFS
+	local _N="${#M[*]}"
 
 	# Step 1. Append Padding Bytes
 	local _pad=$(( 16 - ($_N % 16) ))
