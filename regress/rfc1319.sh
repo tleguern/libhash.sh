@@ -20,13 +20,13 @@ t() {
 	ret="$?"
 	if [ $ret -ne $3 ]; then
 		echo "Wrong exit code for $1 \"$2\" ($ret)"
-		((++FAILED))
+		FAILED=$((FAILED + 1))
 		rm -f "$tmp"
 		return
 	fi
 	if [ "$(cat $tmp)" != "$4" ]; then
 		echo "Wrong result for $1 \"$2\" $(cat $tmp)"
-		((++FAILED))
+		FAILED=$((FAILED + 1))
 		rm -f "$tmp"
 		return
 	fi
@@ -42,7 +42,7 @@ t md2 "abcdefghijklmnopqrstuvwxyz" 0 "4e8ddff3650292ab5a4108c3aa47940b"
 t md2 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" 0 "da33def2a42df13975352846c30338cd"
 t md2 "12345678901234567890123456789012345678901234567890123456789012345678901234567890" 0 "d5976f79d83d3a0dc9806c3c66f3efd8"
 
-if ((FAILED)); then
+if [ "$FAILED" -ne 0 ]; then
 	echo "Error: $FAILED errors found."
 	exit 1
 fi
