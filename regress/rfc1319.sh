@@ -4,8 +4,6 @@
 
 set -u
 
-. ../encode.sh
-. ../glarray.sh
 . ../md2.sh
 
 FAILED=0
