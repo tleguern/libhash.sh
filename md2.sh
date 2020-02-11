@@ -18,7 +18,7 @@ LIBNAME="libhash.sh"
 LIBVERSION="1.0"
 
 md2() {
-	local _value="$*"
+	_value="$*"
 
 	# S-box
 	glarray S  41  46   67 201 162 216 124   1  61  54  84 \
@@ -46,9 +46,9 @@ md2() {
 		    80 180 143 237  31  26 219 153 141  51 159 \
 		    17 131  20
 
-	local _i=0
+	_i=0
 	glarray M
-	local _us="$(printf "\037")"
+	_us="$(printf "\037")"
 	OLDIFS="$IFS"
 	IFS="$_us"
 	_value=$(printf "$_value" | sed "s/./&$_us/g")
@@ -60,11 +60,11 @@ md2() {
 		_i=$(( _i + 1 ))
 	done
 	IFS="$OLDIFS"
-	unset _char _us OLDIFS
-	local _N="${#M[*]}"
+	_N="${#M[*]}"
+	unset _char OLDIFS _us _value _i
 
 	# Step 1. Append Padding Bytes
-	local _pad=$(( 16 - ($_N % 16) ))
+	_pad=$(( 16 - ($_N % 16) ))
 	if [ $_pad -eq 0 ]; then
 		_pad=16
 	fi
@@ -72,20 +72,21 @@ md2() {
 		M[$(( _N + _i ))]=$_pad
 	done
 	_N=$(( _N + _pad ))
+	unset _pad _i
 
 	# Step 2. Append Checksum
 	glarray C 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-	local _L=0
-	local _j=0
+	_L=0
 	for _i in $(enum 0 $(( _N / 16 )) ); do
 		for _j in $(enum 0 16); do
-			local _c=${M[_i * 16 + _j]}
+			_c=${M[_i * 16 + _j]}
 			C[_j]=$(( ${S[_c ^ _L]} ^ ${C[_j]} ))
 			_L=${C[_j]}
 		done
 	done
 	glarray M ${M[*]} ${C[*]}
 	_N=$(( _N + 16 ))
+	unset _L _i _j _c
 
 	# Step 3. Initialize MD Buffer
 	glarray X 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \
@@ -93,26 +94,26 @@ md2() {
 
 
 	# Step 4. Process Message in 16-Byte Blocks
-	local _k=0
 	for _i in $(enum 0 $(( _N / 16 )) ); do
 		for _j in $(enum 0 16); do
 			X[16 + _j]=${M[_i * 16 + _j]}
 			X[32 + _j]=$(( ${X[16 + _j]} ^ ${X[_j]} ))
 		done
-		local _t=0
+		_t=0
 		for _j in $(enum 0 18); do
 			for _k in $(enum 0 48); do
-				local _tmp=$(( ${X[_k]} ^ ${S[_t]} ))
+				_tmp=$(( ${X[_k]} ^ ${S[_t]} ))
 				_t=$_tmp
 				X[_k]=$_tmp
 			done
 			_t=$(( (_t + _j) % 256 ))
 		done
 	done
+	unset _i _j _k _t _tmp
 
 	# Step 5. Output
 	printf "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n" ${X[0]} ${X[1]} ${X[2]} ${X[3]} ${X[4]} ${X[5]} ${X[6]} ${X[7]} ${X[8]} ${X[9]} ${X[10]} ${X[11]} ${X[12]} ${X[13]} ${X[14]} ${X[15]}
 
-	# Step 6. Cleanup
-	unset C M S X
+	# Step 6. Final cleanup
+	unset C M S X _N _glarray
 }
