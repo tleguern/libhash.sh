@@ -1,0 +1,26 @@
+---
+image: debian/stable
+packages:
+  - bash
+  - dash
+  - mksh
+  - zsh
+tasks:
+  - test-bash: |
+      cd libhash.sh/regress/
+      bash rfc1319.t
+      bash rfc1950.t
+  - test-dash: |
+      cd libhash.sh/regress/
+      dash rfc1950.t
+  - test-mksh: |
+      cd libhash.sh/regress/
+      mksh rfc1319.t
+      mksh rfc1950.t
+  - test-zsh: |
+      cd libhash.sh/regress/
+      zsh rfc1950.t
+triggers:
+  - action: email
+    condition: failure
+    to: "<tleguern+libhash@bouledef.eu>"

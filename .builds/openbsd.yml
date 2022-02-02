@@ -1,0 +1,29 @@
+---
+image: openbsd/latest
+packages:
+  - bash
+  - dash--
+  - yash
+  - zsh
+tasks:
+  - test-bash: |
+      cd libhash.sh/regress/
+      bash rfc1319.t
+      bash rfc1950.t
+  - test-dash: |
+      cd libhash.sh/regress/
+      dash rfc1950.t
+  - test-oksh: |
+      cd libhash.sh/regress/
+      ksh rfc1319.t
+      ksh rfc1950.t
+  - test-yash: |
+      cd libhash.sh/regress/
+      yash rfc1950.t
+  - test-zsh: |
+      cd libhash.sh/regress/
+      zsh rfc1950.t
+triggers:
+  - action: email
+    condition: failure
+    to: "<tleguern+libhash@bouledef.eu>"
