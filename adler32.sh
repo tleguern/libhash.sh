@@ -25,15 +25,15 @@ ord() {
 }
 
 adler32() {
-	local _value="$*"
+	_value="$*"
 
-	local _s1=1
-	local _s2=0
+	_s1=1
+	_s2=0
 	# Step 1. Process message
-	local _i=0
-	for _i in $(printf "$_value" | sed 's/./& /g'); do
-		local _b=0
-
+	_us="$(printf "\037")"
+	OLDIFS="$IFS"
+	IFS="$_us"
+	for _i in $(printf "$_value" | sed "s/./&$_us/g"); do
 		_b=$(ord $_i)
 		_s1=$(( (_s1 + _b) % 65521 ))
 		_s2=$(( (_s2 + _s1) % 65521 ))
@@ -41,4 +41,5 @@ adler32() {
 
 	# Step 2. Output
 	printf "%08x\n" $(( (_s2 << 16) + _s1))
+	unset _value _s1 _s2 _i _us _b
 }
