@@ -74,6 +74,10 @@ if [ -n "$file" ]; then
 	fi
 fi
 
+if [ -n "${ZSH_VERSION:-}" ]; then
+	setopt sh_word_split
+fi
+
 . ./encode.sh
 . ./glarray.sh
 . "./$hflag.sh"
