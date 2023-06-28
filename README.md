@@ -12,8 +12,6 @@ Note: The current implementations don't handle spaces nor the empty string.
 Requirements
 ------------
 
-* [libglarray.sh](https://github.com/Aversiste/libglarray.sh) ;
-* encode.sh from [libencode.sh](https://github.com/Aversiste/libencode.sh) ;
 * a POSIX shell from the § Compatibility section.
 
 Compatibility
