@@ -2,8 +2,6 @@
 # Tristan Le Guern <tleguern@bouledef.eu>
 # This file is placed in the public domain.
 
-. ../encode.sh
-. ../glarray.sh
 . ../adler32.sh
 
 FAILED=0

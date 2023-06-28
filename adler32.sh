@@ -17,6 +17,13 @@
 LIBNAME="libhash.sh"
 LIBVERSION="1.0"
 
+#
+# ord() converts the given ASCII char to a decimal value
+#
+ord() {
+	printf "%d" "'$1"
+}
+
 adler32() {
 	local _value="$*"
 
