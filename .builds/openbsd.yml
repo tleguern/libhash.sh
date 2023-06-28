@@ -20,9 +20,9 @@ tasks:
   - test-yash: |
       cd libhash.sh/regress/
       yash rfc1950.t
-  - test-zsh: |
-      cd libhash.sh/regress/
-      zsh rfc1950.t
+# - test-zsh: |
+#     cd libhash.sh/regress/
+#     zsh rfc1950.t
 triggers:
   - action: email
     condition: failure

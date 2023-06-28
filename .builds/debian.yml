@@ -17,9 +17,9 @@ tasks:
       cd libhash.sh/regress/
       mksh rfc1319.t
       mksh rfc1950.t
-  - test-zsh: |
-      cd libhash.sh/regress/
-      zsh rfc1950.t
+# - test-zsh: |
+#     cd libhash.sh/regress/
+#     zsh rfc1950.t
 triggers:
   - action: email
     condition: failure

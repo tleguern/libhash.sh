@@ -21,6 +21,5 @@ It is therefore known to run with the following shells:
 
 The file adler32.sh is further compatible with:
 
-* Z shell - zsh ;
 * Debian Almquist shell - dash ;
 * Yet Another SHell - yash.
